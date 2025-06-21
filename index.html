@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ShopEase - Modern E-Commerce</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+        .product-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        }
+           .nav-link {
+            position: relative;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: #059669; /* emerald-600 */
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .cart-icon:hover .cart-count {
+            background-color: #065f46; /* emerald-800 */
+            transform: scale(1.1);
+        }
+        .search-bar:focus-within {
+            box-shadow: 0 0 0 2px rgba(5, 150, 105, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans antialiased">
+    <!-- Sticky Navigation Bar -->
+   
+    <!-- Header -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <a href="#" class="flex items-center">
+                        <i class=" text-emerald-600 text-2xl mr-2"></i>
+                        <span class="text-xl font-semibold text-gray-800">Eco green BD</span>
+                    </a>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition">Home</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition">Shop</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition">Categories</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition">About</a>
+                    <a href="#" class="nav-link text-gray-700 hover:text-emerald-600 font-medium transition">Contact</a>
+                </nav>
+
+                <!-- Right Side Icons -->
+                <div class="flex items-center space-x-4">
+                    <!-- Search Bar (Desktop) -->
+                    <div class="hidden md:flex relative search-bar">
+                        <input type="text" placeholder="Search products..." 
+                               class="w-40 lg:w-56 px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-emerald-500 transition">
+                        <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-emerald-600">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+
+                    <!-- Cart Icon -->
+                    <a href="#" class="relative p-2 text-gray-700 hover:text-emerald-600 transition cart-icon">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span class="cart-count absolute -top-1 -right-1 bg-emerald-600 text-white text-xs font-bold rounded-full h-5 w-5 flex items-center justify-center transition">3</span>
+                    </a>
+
+                    <!-- Login/Register (Desktop) -->
+                    <div class="hidden md:flex items-center space-x-2 ml-2">
+                        <a href="#" class="px-4 py-2 text-gray-700 hover:text-emerald-600 font-medium transition">Login</a>
+                        <span class="text-gray-300">|</span>
+                        <a href="#" class="px-4 py-2 text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-full transition">Register</a>
+                    </div>
+
+                    <!-- Mobile Menu Button -->
+                    <button class="md:hidden p-2 text-gray-700 hover:text-emerald-600 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Mobile Search Bar -->
+            <div class="md:hidden py-2 px-4">
+                <div class="relative search-bar">
+                    <input type="text" placeholder="Search products..." 
+                           class="w-full px-4 py-2 border border-gray-300 rounded-full focus:outline-none focus:border-emerald-500 transition">
+                    <button class="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-emerald-600">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu (Hidden by default) -->
+        <div class="md:hidden hidden bg-white border-t border-gray-200">
+            <div class="px-4 py-3 space-y-3">
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">Home</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">Shop</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">Categories</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">About</a>
+                <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">Contact</a>
+                <div class="pt-2 border-t border-gray-200">
+                    <a href="#" class="block px-3 py-2 text-gray-700 hover:text-emerald-600 font-medium">Login</a>
+                    <a href="#" class="block px-3 py-2 mt-2 text-white bg-emerald-600 hover:bg-emerald-700 font-medium rounded-full text-center">Register</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Hero Banner -->
+
+     <section class="bg-gradient-to-r from-emerald-50 to-gray-50 py-12">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-8 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Buy Organic Areca Leaf Plates at Best Price in Bangladesh </h1>
+                <p class="text-lg text-gray-600 mb-6">Collection 2025</p>
+                <button class="bg-emerald-600 hover:bg-emerald-700 text-white font-medium py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">
+                    Shop Now
+                </button>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="Product-stack-pxb6d0tvft27ubhe2wwj9pd7trb1quxqn7s34vgidc.png" 
+                     alt="Featured Product" class="rounded-lg  w-full max-w-md">
+            </div>
+        </div>
+    </section> 
+
+    <!-- Category Grid -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8 text-center">Shop by Category</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Category 1 -->
+                <div class="category-card bg-white rounded-lg p-6 shadow-sm border border-gray-100 transition duration-300 cursor-pointer text-center">
+                    <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-home text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Home & Kitchen</h3>
+                    <p class="text-gray-500 text-sm">20+ products</p>
+                </div>
+                
+                <!-- Category 2 -->
+                <div class="category-card bg-white rounded-lg p-6 shadow-sm border border-gray-100 transition duration-300 cursor-pointer text-center">
+                    <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-spa text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Beauty & Health</h3>
+                    <p class="text-gray-500 text-sm">10+ products</p>
+                </div>
+                
+                <!-- Category 3 -->
+                <div class="category-card bg-white rounded-lg p-6 shadow-sm border border-gray-100 transition duration-300 cursor-pointer text-center">
+                    <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-utensils text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Groceries</h3>
+                    <p class="text-gray-500 text-sm">20+ products</p>
+                </div>
+                
+                <!-- Category 4 -->
+                <div class="category-card bg-white rounded-lg p-6 shadow-sm border border-gray-100 transition duration-300 cursor-pointer text-center">
+                    <div class="bg-emerald-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fas fa-laptop text-emerald-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-medium text-gray-800 mb-2">Electronics</h3>
+                    <p class="text-gray-500 text-sm">10+ products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="py-12 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-800">Featured Products</h2>
+                <a href="#" class="text-emerald-600 hover:text-emerald-700 font-medium">View All</a>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                <!-- Product 1 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="6-inch-square-plate-01-600x600.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                        
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">6″ Square Biodegradable Areca Leaf Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(42)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$89.99</span>
+                            <span class="text-gray-400 text-sm line-through ml-2">$112.49</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="9-Inch-Round-Plate-1-600x600.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">9″ Round Areca Leaf Plate: 100% Biodegradable </h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(36)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$149.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="9-Inch-Square-Plate-1-600x600.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                       
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">9″ Eco-friendly Square Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(128)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$169.99</span>
+                            <span class="text-gray-400 text-sm line-through ml-2">$199.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="10-inch-round.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">10″ Round Shaped Eco-friendly Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(54)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$129.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                  <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="10-inch-round.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">10″ Round Shaped Eco-friendly Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(54)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$129.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                  <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="10-inch-round.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">10″ Round Shaped Eco-friendly Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(54)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$129.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                  <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="10-inch-round.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">10″ Round Shaped Eco-friendly Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(54)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$129.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+                  <!-- Product 4 -->
+                <div class="product-card bg-white rounded-lg overflow-hidden shadow-sm border border-gray-100 transition duration-300">
+                    <div class="relative">
+                        <img src="10-inch-round.png" 
+                             alt="Product" class="w-full h-48 object-cover">
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-lg font-medium text-gray-800 mb-1">10″ Round Shaped Eco-friendly Areca Leaf Disposable Plate</h3>
+                        <div class="flex items-center mb-2">
+                            <div class="flex text-yellow-400">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="far fa-star"></i>
+                            </div>
+                            <span class="text-gray-500 text-sm ml-2">(54)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <span class="text-emerald-600 font-bold text-lg">$129.99</span>
+                        </div>
+                        <button class="mt-4 w-full bg-emerald-100 hover:bg-emerald-600 hover:text-white text-emerald-600 font-medium py-2 px-4 rounded transition duration-300">
+                            Add to Cart
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-12 bg-emerald-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Subscribe to Our Newsletter</h2>
+            <p class="text-emerald-100 mb-6 max-w-2xl mx-auto">Get the latest updates on new products and upcoming sales. No spam, we promise.</p>
+            <div class="flex flex-col sm:flex-row max-w-md sm:max-w-xl mx-auto">
+                <input type="email" placeholder="Your email address" 
+                       class="flex-grow py-3 px-4 rounded-l sm:rounded-r-none rounded mb-2 sm:mb-0 text-gray-800 focus:outline-none">
+                <button class="bg-emerald-800 hover:bg-emerald-900 py-3 px-6 rounded-r sm:rounded-l-none rounded font-medium transition duration-300">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-gray-300 py-12">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <!-- Column 1 -->
+                <div>
+                    <div class="flex items-center mb-4">
+                        <i class="fas fa-shopping-bag text-emerald-500 text-2xl mr-2"></i>
+                        <span class="text-xl font-semibold text-white">Eco Green BD</span>
+                    </div>
+                    <p class="mb-4">Your one-stop shop for all your needs. Quality products at affordable prices.</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                
+                <!-- Column 2 -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Home</a></li>
+                        <li><a href="#" class="hover:text-white transition">About Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">Products</a></li>
+                        <li><a href="#" class="hover:text-white transition">Special Offers</a></li>
+                        <li><a href="#" class="hover:text-white transition">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3 -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Customer Service</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-white transition">Contact Us</a></li>
+                        <li><a href="#" class="hover:text-white transition">FAQs</a></li>
+                        <li><a href="#" class="hover:text-white transition">Shipping Policy</a></li>
+                        <li><a href="#" class="hover:text-white transition">Returns & Refunds</a></li>
+                        <li><a href="#" class="hover:text-white transition">Track Order</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 4 -->
+                <div>
+                    <h3 class="text-white font-semibold text-lg mb-4">Contact Info</h3>
+                    <address class="not-italic">
+                        <p class="mb-2"><i class="fas fa-map-marker-alt mr-2 text-emerald-500"></i> Dhaka Bangladesh</p>
+                        <p class="mb-2"><i class="fas fa-phone-alt mr-2 text-emerald-500"></i> (123) 456-7890</p>
+                        <p class="mb-2"><i class="fas fa-envelope mr-2 text-emerald-500"></i> </p>
+                        <p><i class="fas fa-clock mr-2 text-emerald-500"></i> Mon-Fri: 9AM - 6PM</p>
+                    </address>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-sm">
+                <p>&copy; 2025 ShopEase. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        // Simple mobile menu toggle functionality
+        document.querySelector('button.md\\:hidden').addEventListener('click', function() {
+            const mobileMenu = document.querySelector('.md\\:hidden.hidden');
+            mobileMenu.classList.toggle('hidden');
+        });
+    </script>
+</body>
+</html>
